@@ -9,8 +9,6 @@ pickle-mixin
 numpy
 nltk
 wordnet
-pros_cons
-reuters
 
 # ----------------------
 # Testing
