@@ -7,7 +7,10 @@ keras_preprocessing==1.1.0
 tensorflow==1.15.2
 pickle-mixin
 numpy
-nltk==3.5
+nltk
+wordnet
+pros_cons
+reuters
 
 # ----------------------
 # Testing
