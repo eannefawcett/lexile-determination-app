@@ -7,7 +7,7 @@ keras_preprocessing==1.1.0
 tensorflow==1.15.2
 pickle-mixin
 numpy
-nltk
+nltk==1.16.5
 
 # ----------------------
 # Testing
