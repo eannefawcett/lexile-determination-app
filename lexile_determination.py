@@ -19,10 +19,10 @@ from keras import models, layers, optimizers
 from keras.models import load_model
 
 ## initializing webpage
-lexile_determination = Flask(__name__)
-lexile_determination.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'this_should_be_configured')
+app = Flask(__name__)
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'this_should_be_configured')
 #auto reload while testing
-lexile_determination.config["TEMPLATES_AUTO_RELOAD"] = True
+app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 ## functions for use in webpage
 def initialize():
@@ -114,21 +114,21 @@ global model
 model, tokenizer = initialize()
 
 # Routing for your application.
-@lexile_determination.route('/', methods=["GET", "POST"])
+@app.route('/', methods=["GET", "POST"])
 def home():
     """Render website's home page."""
     return render_template('home.html')
 
 #new route for /predict
 
-@lexile_determination.route('/predict', methods=["GET", "POST"])
+@app.route('/predict', methods=["GET", "POST"])
 def predict():
     """predicts what lexile level the user passed in"""
     user_input = request.form['user.input']
     to_post = model_predict(user_input)
     return render_template("home.html", to_post=to_post)#a thing to send to js in whatever format you want the user to see
 
-@lexile_determination.route('/about/')
+@app.route('/about/')
 def about():
     """Render the website's about page."""
     return render_template('about.html')
@@ -138,14 +138,14 @@ def about():
 # The functions below should be applicable to all Flask apps.
 ###
 
-@lexile_determination.route('/<file_name>.txt')
+@app.route('/<file_name>.txt')
 def send_text_file(file_name):
     """Send your static text file."""
     file_dot_text = file_name + '.txt'
     return app.send_static_file(file_dot_text)
 
 
-@lexile_determination.after_request
+@app.after_request
 def add_header(response):
     """
     Add headers to both force latest IE rendering engine or Chrome Frame,
@@ -156,11 +156,11 @@ def add_header(response):
     return response
 
 
-@lexile_determination.errorhandler(404)
+@app.errorhandler(404)
 def page_not_found(error):
     """Custom 404 page."""
     return render_template('404.html'), 404
 
 
 if __name__ == '__main__':
-    lexile_determination.run(debug=True)
+    app.run(debug=True)
