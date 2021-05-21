@@ -4,7 +4,7 @@
 flask
 keras==2.2.4
 keras_preprocessing==1.1.0
-tensorflow==1.15.4
+tensorflow==2.5.0
 pickle-mixin
 numpy==1.16.5
 nltk==3.4.5
